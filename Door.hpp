@@ -12,8 +12,12 @@ private:
 
 public:
     bool isHere;
-    Room * nextRoom;
-    Door(Room * nextRoom);
+    //Room * nextRoom;
+    //Door();
+    Door(Room * room1, Room * room2);
+    Door();
+    Room * room1;
+    Room * room2;
 
 
 };

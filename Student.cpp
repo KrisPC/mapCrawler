@@ -11,13 +11,26 @@ Student::Student(Room * currentRoom)
     this->currentRoom = currentRoom;
 }
 
+Room * Student::otherRoom(Door * currentDoor)
+{
+    if(currentDoor->room1 == this->currentRoom)
+    {
+        return currentDoor->room2;
+    }
+    else
+    {
+        return currentDoor->room1;
+    }
+    
+}
+
 string Student::tryToLeave(char direction)
 {
     if(direction == 'w')
     {
         if(this->currentRoom->up->isHere)
         {
-            this->currentRoom = this->currentRoom->up->nextRoom;
+            this->currentRoom = this->otherRoom(this->currentRoom->up);
                         std::cout<<"#############################################################\n";
 
             this->currentRoom->displayRoom();
@@ -35,7 +48,7 @@ string Student::tryToLeave(char direction)
     {
         if(this->currentRoom->down->isHere)
         {
-            this->currentRoom = this->currentRoom->down->nextRoom;
+            this->currentRoom = this->otherRoom(this->currentRoom->down);
             std::cout<<"#############################################################\n";
             this->currentRoom->displayRoom();
             return "In new room\n";
@@ -52,7 +65,7 @@ string Student::tryToLeave(char direction)
     {
         if(this->currentRoom->left->isHere)
         {
-            this->currentRoom = this->currentRoom->left->nextRoom;
+            this->currentRoom = this->otherRoom(this->currentRoom->left);
             std::cout<<"#############################################################\n";
             this->currentRoom->displayRoom();
             return "In new room\n";
@@ -68,7 +81,7 @@ string Student::tryToLeave(char direction)
     {
         if(this->currentRoom->right->isHere)
         {
-            this->currentRoom = this->currentRoom->right->nextRoom;
+            this->currentRoom = this->otherRoom(this->currentRoom->right);
             std::cout<<"#############################################################\n";
             this->currentRoom->displayRoom();
             return "In new room\n";
